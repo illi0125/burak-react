@@ -6,9 +6,9 @@ import { store } from './app/store';
 import App from './app/App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme';
 import './css/index.css';
 import './css/app.css';
+import theme from './app/MaterialTheme';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
