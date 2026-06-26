@@ -1,9 +1,9 @@
-import React from "react";
+// import React from "react";
 // import { Box, Button, Container, Stack, Typography } from "@mui/material";
 // import { RippleBadge } from "./MaterialTheme/styled";
-import { Link, Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom"; //Link
 import { HomePage } from "./screens/homePage";
-import { ProdcutsPage } from "./screens/productsPage";
+import { ProductsPage } from "./screens/productsPage";
 import { OrdersPage } from "./screens/ordersPage";
 import { UserPage } from "./screens/userPage";
 import { HomeNavbar } from "./components/headers/HomeNavbar";
@@ -22,7 +22,7 @@ function App() {
       {location.pathname === "/" ? <HomeNavbar/> : <OtherNavbar/>}
       <Switch>
         <Route path="/products">
-          <ProdcutsPage />
+          <ProductsPage />
         </Route>
         <Route path="/orders">
           <OrdersPage />
