@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import type { ThunkAction, Action } from "@reduxjs/toolkit";
 import HomePage from "./screens/homePage/index";
 import ProductsPage from "./screens/productsPage/productsPagesSlice";
-import OrdersPage from "./screens/ordersPage/index";
+import OrdersPage from "./screens/ordersPage/ordersSlice";
 import { createLogger } from "redux-logger";
 
 export const store = configureStore({
