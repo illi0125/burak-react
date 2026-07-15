@@ -9,7 +9,6 @@ import type { Product } from "./product";
 
 export interface AppRootState {
   homePage: HomePageState;
-  // productsPage: ProductsPageState;
 }
 
 // ─── HOMEPAGE ─────────────────────────────────────────

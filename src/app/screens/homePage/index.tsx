@@ -5,14 +5,24 @@ import Advertisement from "./Advertisement";
 import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 import "../../../css/home.css";
+import { useEffect } from "react";
 
 export default function HomePage() {
-  return <div className="homepage">
-    <Statistics/>
-    <PopularDishes/>
-    <NewDishes/>
-    <Advertisement/>
-    <ActiveUsers/>
-    <Events/>
-  </div>;
+  // Selector: Store => Data
+
+  useEffect(() => {
+    // Backend server date request => Data
+    // Slice: Data => Store
+  }, []);
+
+  return (
+    <div className="homepage">
+      <Statistics />
+      <PopularDishes />
+      <NewDishes />
+      <Advertisement />
+      <ActiveUsers />
+      <Events />
+    </div>
+  );
 }
