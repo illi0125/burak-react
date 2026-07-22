@@ -7,36 +7,36 @@ import Events from "./Events";
 import "../../../css/home.css";
 import { useEffect } from "react";
 
-import { createSelector, type Dispatch } from "@reduxjs/toolkit";
+import { type Dispatch } from "@reduxjs/toolkit";
 import { setPopularDishes } from "./slice";
 import type { Product } from "../../../lib/types/product";
-import { useDispatch, useSelector } from "react-redux";
-import { retrievePopularDishes } from "./selector";
+import { useDispatch } from "react-redux";
+import ProductService from "../../services/ProductService";
+import { ProductCollection } from "../../../lib/enums/product.enum";
 
 // ─── REDUX SLICE & SELECTOR ──────────────────────────
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
 });
-const popularDishesRetriever = createSelector(
-  retrievePopularDishes,
-  (popularDishes) => ({ popularDishes }),
-);
 
 export default function HomePage() {
   const { setPopularDishes } = actionDispatch(useDispatch());
-  const { popularDishes } = useSelector(popularDishesRetriever);
-  // Selector: Store => Data
-
-  console.log(import.meta.env.VITE_API_URL);
 
   useEffect(() => {
     // Backend server date request => Data
-    // const result = [];
-    // Slice: Data => Store
-    // @ts-ignore
-    // setPopularDishes(result);
+    const product = new ProductService();
+    product
+      .getProducts({
+        page: 1,
+        limit: 4,
+        order: "productViews",
+        productCollection: ProductCollection.DISH,
+      })
+      .then((data) => {
+        setPopularDishes(data);
+      })
+      .catch((err) => console.log(err));
   }, []);
-  // console.log("popularDishes:", popularDishes);
 
   return (
     <div className="homepage">
