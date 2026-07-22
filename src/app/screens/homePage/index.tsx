@@ -27,6 +27,8 @@ export default function HomePage() {
   const { popularDishes } = useSelector(popularDishesRetriever);
   // Selector: Store => Data
 
+  console.log(import.meta.env.VITE_API_URL);
+
   useEffect(() => {
     // Backend server date request => Data
     // const result = [];
