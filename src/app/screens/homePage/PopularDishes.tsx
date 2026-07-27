@@ -24,13 +24,18 @@ export default function PopularDishes() {
   const { popularDishes } = useSelector(popularDishesRetriever);
   // console.log("popularDishes:", popularDishes);
 
+  const hasDishes = Array.isArray(popularDishes) && popularDishes.length > 0;
+  console.log("hasDishes:", hasDishes);
   return (
     <div className="popular-dishes-frame">
       <Container>
         <Stack className="popular-section">
           <Box className="category-title">Popular Dishes</Box>
           <Stack className="cards-frame">
-            {popularDishes.length !== 0 ? (
+            {/* {popularDishes.length !== 0 ? (
+              popularDishes.map((product: Product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`; */}
+            {Array.isArray(popularDishes) && popularDishes.length > 0 ? (
               popularDishes.map((product: Product) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
 
@@ -42,7 +47,10 @@ export default function PopularDishes() {
                       </CardCover>
                       <CardCover className="card-cover" />
                       <CardContent sx={{ justifyContent: "flex-end" }}>
-                        <Stack flexDirection="row" justifyContent="space-between">
+                        <Stack
+                          flexDirection="row"
+                          justifyContent="space-between"
+                        >
                           <Typography
                             level="h2"
                             fontSize="lg"
