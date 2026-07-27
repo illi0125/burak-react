@@ -32,11 +32,8 @@ export default function PopularDishes() {
         <Stack className="popular-section">
           <Box className="category-title">Popular Dishes</Box>
           <Stack className="cards-frame">
-            {/* {popularDishes.length !== 0 ? (
-              popularDishes.map((product: Product) => {
-                const imagePath = `${serverApi}/${product.productImages[0]}`; */}
-            {Array.isArray(popularDishes) && popularDishes.length > 0 ? (
-              popularDishes.map((product: Product) => {
+            {popularDishes?.length !== 0 ? (
+              popularDishes?.map((product: Product) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
 
                 return (
