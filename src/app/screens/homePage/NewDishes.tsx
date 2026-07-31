@@ -14,12 +14,9 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import { retrieveNewDishes } from "./selector";
 
 // ─── REDUX SLICE & SproductCTOR ──────────────────────────
-const newDishesRetriever = createSelector(
-  retrieveNewDishes,
-  (newDishes) => ({
-    newDishes,
-  }),
-);
+const newDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({
+  newDishes,
+}));
 
 export default function NewDishes() {
   const { newDishes } = useSelector(newDishesRetriever);
@@ -32,7 +29,9 @@ export default function NewDishes() {
           <Box className="category-title">Fresh Menu</Box>
           <Stack className="cards-frame">
             <CssVarsProvider>
-              {newDishes.length !== 0 ? (
+              {/* {newDishes.length !== 0 ? (
+                newDishes.map((product: Product) => { */}
+              {Array.isArray(newDishes) && newDishes.length > 0 ? (
                 newDishes.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   const sizeVolume =

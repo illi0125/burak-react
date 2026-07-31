@@ -50,7 +50,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberNick, setMemberNick] = useState<string>("");
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
-  const {setAuthMember} = useGlobals();
+  const { setAuthMember } = useGlobals();
 
   /** HANDLERS **/
 
@@ -96,10 +96,15 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
     }
   };
 
-   const handleLoginRequest = async () => {
+  const handleLoginRequest = async (e?: React.SyntheticEvent) => {
+    if (e) e.preventDefault(); // Stop default event focus handling
+  
+  // Blur active element
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
     try {
-      const isFulfill =
-        memberNick !== "" && memberPassword !== "";
+      const isFulfill = memberNick !== "" && memberPassword !== "";
       if (!isFulfill) throw new Error(Messages.error3);
 
       const loginInput: LoginInput = {
@@ -109,6 +114,15 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
 
       const member = new MemberService();
       const result = await member.login(loginInput);
+
+      // 1. Remove focus from the active button/input inside the modal
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+
+      // 2. Close modal first, then update auth state
+      handleLoginClose();
+      setAuthMember(result);
 
       // saving authenticated user
       setAuthMember(result);
@@ -129,6 +143,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
         open={signupOpen}
         onClose={handleSignupClose}
         closeAfterTransition
+        disableAutoFocus
         disableRestoreFocus
         disableEnforceFocus
         BackdropComponent={Backdrop}

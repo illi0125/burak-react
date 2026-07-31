@@ -1,11 +1,18 @@
-import { Box, Button, Container, Menu, MenuItem, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Menu,
+  MenuItem,
+  Stack,
+  ListItemIcon,
+} from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import type { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
 import { serverApi } from "../../../lib/config";
-import { ListItemIcon } from "@material-ui/core";
 import { Logout } from "@mui/icons-material";
 
 interface HomeNavbarProps {
@@ -91,7 +98,11 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 <Button
                   variant="contained"
                   className="login-button"
-                  onClick={() => setLoginOpen(true)}
+                  // onClick={() => setLoginOpen(true)}
+                  onClick={(e) => {
+                    e.currentTarget.blur();
+                    setLoginOpen(true);
+                  }}
                 >
                   Login
                 </Button>
@@ -115,6 +126,8 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               open={Boolean(anchorEl)}
               onClose={handleCloseLogout}
               onClick={handleCloseLogout}
+              disableAutoFocusItem
+              disableRestoreFocus
               PaperProps={{
                 elevation: 0,
                 sx: {
@@ -144,7 +157,13 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <MenuItem onClick={handleLogoutRequest}>
+              <MenuItem
+                onClick={(e) => {
+                  (e.currentTarget as HTMLElement).blur();
+                  handleCloseLogout();
+                  handleLogoutRequest();
+                }}
+              >
                 <ListItemIcon>
                   <Logout fontSize="small" style={{ color: "blue" }} />
                 </ListItemIcon>
@@ -163,7 +182,11 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 <Button
                   variant="contained"
                   className="signup-button"
-                  onClick={() => setSignupOpen(true)}
+                  // onClick={() => setSignupOpen(true)}
+                  onClick={(e) => {
+                    e.currentTarget.blur();
+                    setSignupOpen(true);
+                  }}
                 >
                   SIGN UP
                 </Button>
