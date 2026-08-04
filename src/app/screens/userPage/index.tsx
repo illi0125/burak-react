@@ -9,12 +9,21 @@ import { useGlobals } from "../../hooks/useGlobals";
 import { serverApi } from "../../../lib/config";
 import { MemberType } from "../../../lib/enums/member.enum";
 import "../../../css/userPage.css";
+import { useEffect } from "react";
 
 export default function UserPage() {
   const history = useHistory();
   const { authMember } = useGlobals();
 
-  if (!authMember) history.push("/");
+  useEffect(() => {
+    if (!authMember) {
+      history.push("/");
+    }
+  }, [authMember, history]);
+
+  // Don't render component UI if not logged in
+  if (!authMember) return null;
+  // if (!authMember) history.push("/");
   return (
     <div className={"user-page"}>
       <Container>

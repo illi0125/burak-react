@@ -126,8 +126,10 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               open={Boolean(anchorEl)}
               onClose={handleCloseLogout}
               onClick={handleCloseLogout}
+              transitionDuration={0}
               disableAutoFocusItem
               disableRestoreFocus
+              disableEnforceFocus
               PaperProps={{
                 elevation: 0,
                 sx: {
@@ -158,10 +160,14 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
               <MenuItem
-                onClick={(e) => {
-                  (e.currentTarget as HTMLElement).blur();
+                onClick={() => {
+                  if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur();
+                  }
                   handleCloseLogout();
-                  handleLogoutRequest();
+                  setTimeout(() => {
+                    handleLogoutRequest();
+                  }, 0);
                 }}
               >
                 <ListItemIcon>
